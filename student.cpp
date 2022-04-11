@@ -9,8 +9,6 @@ using namespace std;
                 return it;
             }
         }
-
-
         listSubjMark.push_back(new SubjMark(subjName));
         return listSubjMark.end();
     }
@@ -35,6 +33,8 @@ Student::~Student()
     }
 
     void Student::addSubject(const char* subjName, int idSubj) {
+
+
         for (list<SubjMark*>::iterator it = listSubjMark.begin(); it != listSubjMark.end(); ++it)
         {
             if (strcmp((*it)->subj, subjName) == 0)

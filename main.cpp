@@ -284,7 +284,7 @@ void task6()
     cout << "2 - добавить элемент в заданное место списка." << endl;
     cout << "3 - вывести список на экран." << endl;
     cout << "4 - записать список в файл." << endl;
-    cout << "5 - перейти к следующему заданию" << endl;
+    cout << "5 - выйти" << endl;
     while (ok)
     {
         int oper;
@@ -340,38 +340,40 @@ void task8()
 }
 void callTasks()
 {
-    //task1();
+    task1();
 
-//    int num;
-//    cout << "Введите число, которое нужно перевоести в двоичный вид:";
-//    cin >> num;
-//    cout << "Результат:" << endl;
-//    task2(num);
+    int num;
+    cout << "Введите число, которое нужно перевоести в двоичный вид:";
+    cin >> num;
+    cout << "Результат:" << endl;
+    task2(num);
+    cout << endl;
 
-//    char* inpt = "0101111010";
-//    task3(inpt, strlen(inpt));
-//    cout << endl;
-//    cout << endl;
+    char* inpt = "010111010";
 
-//    int N, M;
-//    cout << "Введите кол-во строк матрицы:";
-//    cin >> N;
-//    cout << "Введите кол-во столбцов матрицы:";
-//    cin >> M;
-//    cout << "Матрица заполняется случайными числами. Созданная матрица:" << endl;
-//    int **ar = new int*[N];
-//    for (int i = 0; i < N; i++)
-//    {
-//        ar[i] = new int[M];
-//    }
-//    fillArray(ar, N, M);
-//    printArray(ar, N, M);
-//    cout << endl;
-//    task5(ar, N, M);
-//    cout << endl;
+    task3(inpt, strlen(inpt));
+    cout << endl;
+    cout << endl;
 
-//    task6();
-//    cout << endl;
+    int N, M;
+    cout << "Введите кол-во строк матрицы:";
+    cin >> N;
+    cout << "Введите кол-во столбцов матрицы:";
+    cin >> M;
+    cout << "Матрица заполняется случайными числами. Созданная матрица:" << endl;
+    int **ar = new int*[N];
+    for (int i = 0; i < N; i++)
+    {
+        ar[i] = new int[M];
+    }
+    fillArray(ar, N, M);
+    printArray(ar, N, M);
+    cout << endl;
+    task5(ar, N, M);
+    cout << endl;
+
+    task6();
+    cout << endl;
 
     task8();
 }

@@ -15,7 +15,7 @@ struct StudentInfo {
 };
 
 struct SubjMark {
-    char* subj;
+    char subj[100];
     int id_subj;
     vector<int> marks_list;
     float averMark;
@@ -27,17 +27,18 @@ struct SubjMark {
     }
     SubjMark(const char* _subj)
     {
-        subj = (char*)_subj;
+        memset(subj, 0 ,100);
+        memcpy(subj, _subj, strlen(_subj));
+
     }
     SubjMark(const char* _subj, int _idSubj)
     {
-        subj = (char*)_subj;
+        memset(subj, 0 ,100);
+        memcpy(subj, _subj, strlen(_subj));
         id_subj = _idSubj;
     }
     ~SubjMark() {
-        if (subj != nullptr) {
-            delete [] subj;
-        }
+
     }
 
 };
