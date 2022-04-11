@@ -8,8 +8,8 @@
 
 using namespace std;
 
-const int N = 2;
-const int M = 3;
+//const int N = 2;
+//const int M = 3;
 
 struct Node
 {
@@ -32,6 +32,7 @@ class LinkedList
             void writeListToFile(const char* fileName);
             void insertTo(int index, int number);
         };
+
 LinkedList::LinkedList()
 {
     Head = Tail = NULL;
@@ -71,19 +72,22 @@ void LinkedList::showList()
     {
 
         Node* temp = Head;
-        cout << "Size: " << length;
-        cout << endl;
+        //cout << "Size: " << length;
+        //cout << endl;
         while (temp != NULL)
         {
-            cout << temp->element << " ";
+            cout << temp->element << endl;
+            //cout << " ";
             temp = temp->next;
         }
+
 
     }
     else
     {
         cout << "Empty" << endl;
     }
+    cout << endl;
 }
 void LinkedList::insertTo(int index, int number)
 {
@@ -164,10 +168,10 @@ void readFromFile1(const char* fileName, unsigned int* buff)
     }while (i != EOF);
     fclose(f1);
 }
-void writeToFile(unsigned int* chars, const char* fileName)
+void writeToFile(unsigned int* chars)
 {
     FILE *f1;
-    f1 = fopen(fileName, "w");
+    f1 = fopen("outputfile1.txt", "w");
     for (int i = 33; i < 127; i++)
     {
         fprintf(f1, "%c -> %u\n", (char)i, chars[i]);
@@ -175,22 +179,15 @@ void writeToFile(unsigned int* chars, const char* fileName)
 
     fclose(f1);
 }
-void tempT() {
-
-    for (int i = 0; i < 256; i++) {
-        cout << (int)i << "\t" << (char)i;
-    }
-
-}
 void fillArray(int **ar, const int N, const int M)
 {
+    srand(time(nullptr));
     int count = 0;
     for (int i = 0; i < N; i++)
     {
         for (int j = 0; j < M; j++)
         {
-            ar[i][j] = count;
-            count++;
+            ar[i][j] = rand();
         }
     }
 }
@@ -209,13 +206,13 @@ void printArray(int **ar, const int N, const int M)
 void task1()
 {
     unsigned int buff[255] = {0};
-    readFromFile1("C:\\8 tasks\\main.cpp", buff);
-    writeToFile(buff, "C:\\8 tasks\\task1_result.txt");
+    readFromFile1("inputfile1.txt", buff);
+    writeToFile(buff);
 }
 void task2(int num)
 {
     FILE  *f1;
-    f1=fopen("outputfile2","w");
+    f1=fopen("outputfile2.txt","w");
     char binNumb[32];
     bool isLeadZero = true;
     int firstNonZero = 0;
@@ -273,22 +270,62 @@ void task5(int **ar, const int N, const int M)
         summ/=M;
         result[i] = summ;
     }
+    cout << "Средние значения для строчек:" << endl;
     for (int i = 0; i < N; i++)
     {
-        cout << result[i] << endl;
+        cout << i+1 << " строчка: " << result[i] << endl;
     }
 }
 void task6()
 {
     LinkedList lst;
-    lst.addFirstToList(1);
-    lst.addFirstToList(21);
-    lst.addFirstToList(31);
-    lst.showList();
-    cout << endl;
-    lst.insertTo(0, 79);
-    lst.showList();
-    lst.writeListToFile("C:\\8 tasks\\task6_result.txt");
+    bool ok = true;
+    cout << "1 - добавить элемент в начало списка." << endl;
+    cout << "2 - добавить элемент в заданное место списка." << endl;
+    cout << "3 - вывести список на экран." << endl;
+    cout << "4 - записать список в файл." << endl;
+    cout << "5 - перейти к следующему заданию" << endl;
+    while (ok)
+    {
+        int oper;
+        cout << "Выберите операцию:";
+        cin >> oper;
+        switch (oper)
+        {
+            case 1:
+                int number;
+                cout << "Введите число:";
+                cin >> number;
+                lst.addFirstToList(number);
+                break;
+            case 2:
+                int num;
+                int index;
+                cout << "Введите число:";
+                cin >> num;
+                cout << "Введите порядковый номер:";
+                cin >> index;
+                lst.insertTo(index-1, num);
+                break;
+            case 3:
+                lst.showList();
+                break;
+            case 4:
+                lst.writeListToFile("outputfile6.txt");
+                break;
+            case 5:
+                ok = false;
+                break;
+        }
+    }
+//    lst.addFirstToList(1);
+//    lst.addFirstToList(21);
+//    lst.addFirstToList(31);
+//    lst.showList();
+//    cout << endl;
+//    lst.insertTo(0, 79);
+//    lst.showList();
+//    lst.writeListToFile("C:\\8 tasks\\task6_result.txt");
 }
 void task8()
 {
@@ -305,29 +342,38 @@ void callTasks()
 {
     //task1();
 
-    int num = 18;
-    //task2(num);
+//    int num;
+//    cout << "Введите число, которое нужно перевоести в двоичный вид:";
+//    cin >> num;
+//    cout << "Результат:" << endl;
+//    task2(num);
 
-    char* inpt = "0101111010";
-    //task3(inpt, strlen(inpt));
-    cout << endl;
-    cout << endl;
+//    char* inpt = "0101111010";
+//    task3(inpt, strlen(inpt));
+//    cout << endl;
+//    cout << endl;
 
-    int **ar = new int*[N];
-    for (int i = 0; i < N; i++)
-    {
-        ar[i] = new int[M];
-    }
-    fillArray(ar, N, M);
-    //printArray(ar, N, M);
-    cout << endl;
-    //task5(ar, N, M);
-    cout << endl;
+//    int N, M;
+//    cout << "Введите кол-во строк матрицы:";
+//    cin >> N;
+//    cout << "Введите кол-во столбцов матрицы:";
+//    cin >> M;
+//    cout << "Матрица заполняется случайными числами. Созданная матрица:" << endl;
+//    int **ar = new int*[N];
+//    for (int i = 0; i < N; i++)
+//    {
+//        ar[i] = new int[M];
+//    }
+//    fillArray(ar, N, M);
+//    printArray(ar, N, M);
+//    cout << endl;
+//    task5(ar, N, M);
+//    cout << endl;
 
-    task6();
-    cout << endl;
+//    task6();
+//    cout << endl;
 
-    //task8();
+    task8();
 }
 
 int main(int argc, char *argv[])
