@@ -15,31 +15,96 @@ struct Node
 {
     Node* prev;
     Node* next;
-    char* string;
+    int element;
     int size;
 };
 class LinkedList
         {
         private:
-            Node *HEAD;
-            Node *TAIL;
+            Node *Head;
+            Node *Tail;
+            Node *Size;
         public:
             LinkedList();
             ~LinkedList();
+            void addFirstToList(char number);
+            void showList();
+            void writeListToFile(const char* fileName);
         };
 LinkedList::LinkedList()
 {
-
+    Head = Tail = NULL;
+    Size = 0;
 }
 LinkedList::~LinkedList()
 {
-    while (HEAD)
+    while (Head)
     {
-        TAIL = HEAD->next;
-        delete HEAD;
-        HEAD = TAIL;
+        Tail = Head->next;
+        delete Head;
+        Head = Tail;
     }
 }
+
+void LinkedList::addFirstToList(char number)
+{
+    Node *temp = new Node;
+    //temp->next = NULL; // По следующему адресу пусто
+    temp->element = number;
+    if (Head == NULL)
+    {
+        temp->next = Tail;
+        Tail = temp;
+    }
+    else
+    {
+        temp->next = Head;
+        Head->prev = temp;
+    }
+    Head = temp;
+    Head->prev = NULL;
+    Size++;
+}
+void LinkedList::showList()
+{
+    if (Head != NULL)
+    {
+
+        Node* temp = Head;
+        cout << "Size: " << Size;
+        cout << endl;
+        while (temp != NULL)
+        {
+            cout << temp->element << " ";
+            temp = temp->next;
+        }
+
+    }
+    else
+    {
+        cout << "Empty" << endl;
+    }
+}
+void LinkedList::writeListToFile(const char* fileName)
+{
+    FILE *f1;
+    f1 = fopen(fileName, "w");
+    Node* tempHead = Head;
+    Node* tempTail = Tail;
+    while (tempHead != NULL)
+    {
+        fprintf(f1, "%d ", tempHead->element);
+        tempHead = tempHead->next;
+    }
+    fprintf(f1, "\n");
+    while (tempTail != NULL)
+    {
+        fprintf(f1, "%d ", tempTail->element);
+        tempTail = tempTail->prev;
+    }
+    fclose(f1);
+}
+
 
 void readFromFile1(const char* fileName, unsigned int* buff)
 {
@@ -103,8 +168,6 @@ void printArray(int **ar, const int N, const int M)
 }
 void linkedListToFile(Node *TAIL)
 {
-    Node* cur_node = TAIL;
-    int elements_count = 0;
 
 }
 
@@ -125,6 +188,24 @@ void task2(int num)
         fprintf(f1,"%c", binNumb[i]);
     }
     fclose(f1);
+}
+void task3(char* bin, int length)
+{
+    int num = 0;
+    for (int i = 0; i < length; i++)
+    {
+
+        if (bin[i] == 0x31)
+        {
+            num++;
+        }
+        if (i != length-1)
+        {
+            num = num << 1;
+        }
+
+    }
+    printf("0x%x", num);
 }
 void task5(int **ar, const int N, const int M)
 {
@@ -147,7 +228,12 @@ void task5(int **ar, const int N, const int M)
 }
 void task6()
 {
-
+    LinkedList lst;
+    lst.addFirstToList(1);
+    lst.addFirstToList(21);
+    lst.addFirstToList(31);
+    //lst.showList();
+    lst.writeListToFile("C:\\8 tasks\\task6_result.txt");
 }
 void task8()
 {
@@ -160,22 +246,36 @@ void task8()
     student->addMarkToSubj("Инфа", 5);
     student->print();
 }
+void callTasks()
+{
+    //task1();
+
+    int num = 17;
+    //task2(num);;
+
+    char* inpt = "0x310x300x310x31";
+    task3(inpt, strlen(inpt));
+    cout << endl;
+    cout << endl;
+
+    int **ar = new int*[N];
+    for (int i = 0; i < N; i++)
+    {
+        ar[i] = new int[M];
+    }
+    fillArray(ar, N, M);
+    //printArray(ar, N, M);
+    cout << endl;
+    //task5(ar, N, M);
+    cout << endl;
+
+    //task6();
+
+    //task8();
+}
 
 int main(int argc, char *argv[])
 {
     SetConsoleOutputCP(CP_UTF8);
-    task1();
-//    int num = 17;
-//    int **ar = new int*[N];
-//    for (int i = 0; i < N; i++)
-//    {
-//        ar[i] = new int[M];
-//    }
-//    fillArray(ar, N, M);
-//    printArray(ar, N, M);
-//    cout << endl;
-//    task5(ar, N, M);
-//    task2(num);
-//    task8();
-//    tempT();
+    callTasks();
 }
