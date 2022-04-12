@@ -1,5 +1,4 @@
 #include <List>
-#include <vector>
 #include <stdio.h>
 #include <iostream>
 #include <windows.h>
@@ -9,9 +8,6 @@
 #include "student.h"
 
 using namespace std;
-
-//const int N = 2;
-//const int M = 3;
 
 struct Node
 {
@@ -233,9 +229,14 @@ void task2(int num)
         }
     }
     cout << endl;
+    fprintf(f1,"\n");
     for (int i = 0; i <= firstNonZero; i++)
     {
         cout << binNumb[i];
+    }
+    for (int i = 0; i <= firstNonZero; i++)
+    {
+        fprintf(f1,"%c", binNumb[i]);
     }
     fclose(f1);
 
