@@ -1,9 +1,11 @@
 #include <List>
 #include <vector>
-#include <string.h>
 #include <stdio.h>
 #include <iostream>
 #include <windows.h>
+#include <algorithm>
+#include <string>
+#include <regex>
 #include "student.h"
 
 using namespace std;
@@ -238,7 +240,7 @@ void task2(int num)
     fclose(f1);
 
 }
-void task3(char* bin, int length)
+void task3(const char* bin, int length)
 {
     int num = 0;
     for (int i = 0; i < length; i++)
@@ -254,7 +256,8 @@ void task3(char* bin, int length)
         }
 
     }
-    printf("0x%x", num);
+    printf("Число в шестнадцатиричном виде:%x", num);
+
 }
 void task5(int **ar, const int N, const int M)
 {
@@ -276,7 +279,7 @@ void task5(int **ar, const int N, const int M)
         cout << i+1 << " строчка: " << result[i] << endl;
     }
 }
-void task6()
+void task6_7()
 {
     LinkedList lst;
     bool ok = true;
@@ -340,21 +343,34 @@ void task8()
 }
 void callTasks()
 {
+    // Задача 1
     task1();
+    cout << "1 задача выполнена." << endl;
+    cout << endl;
 
+    // Задача 2
     int num;
-    cout << "Введите число, которое нужно перевоести в двоичный вид:";
+    cout << "Введите число, которое нужно перевести в двоичный вид:";
     cin >> num;
     cout << "Результат:" << endl;
     task2(num);
     cout << endl;
+    cout << "2 задача выполнена." << endl;
+    cout << endl;
 
-    char* inpt = "010111010";
-
+    // Задача 3
+    const char* inpt = "0x310x300x310x300x30";
+    string line = string(inpt);
+    regex rx("0x3");
+    string fmt("");
+    line = regex_replace(line, rx, fmt);
+    inpt = line.c_str();
     task3(inpt, strlen(inpt));
     cout << endl;
+    cout << "3 задача выполнена." << endl;
     cout << endl;
 
+    // Задача 5
     int N, M;
     cout << "Введите кол-во строк матрицы:";
     cin >> N;
@@ -370,12 +386,17 @@ void callTasks()
     printArray(ar, N, M);
     cout << endl;
     task5(ar, N, M);
+    cout << "5 задача выполнена." << endl;
     cout << endl;
 
-    task6();
+    // Задачи 6 и 7
+    task6_7();
+    cout << "6 и 7 задачи выполнены." << endl;
     cout << endl;
 
+    // Задача 8
     task8();
+    cout << "8 задача выполнена." << endl;
 }
 
 int main(int argc, char *argv[])
