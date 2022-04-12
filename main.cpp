@@ -257,7 +257,7 @@ void task3(const char* bin, int length)
         }
 
     }
-    printf("Число в шестнадцатеричном виде:%x", num);
+    printf(" в шестнадцатеричном виде:%x", num);
 
 }
 void task5(int **ar, const int N, const int M)
@@ -361,6 +361,7 @@ void callTasks()
 
     // Задача 3
     const char* inpt = "0x31 0x30 0x31 0x30 0x30";
+    cout << "Входное число " << inpt;
     string line = string(inpt);
     regex rx("0x3");
     string fmt("");
