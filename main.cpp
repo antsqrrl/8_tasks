@@ -257,7 +257,7 @@ void task3(const char* bin, int length)
         }
 
     }
-    printf("Число в шестнадцатиричном виде:%x", num);
+    printf("Число в шестнадцатеричном виде:%x", num);
 
 }
 void task5(int **ar, const int N, const int M)
@@ -360,11 +360,14 @@ void callTasks()
     cout << endl;
 
     // Задача 3
-    const char* inpt = "0x310x300x310x300x30";
+    const char* inpt = "0x31 0x30 0x31 0x30 0x30";
     string line = string(inpt);
     regex rx("0x3");
     string fmt("");
+    regex lx(" ");
+    string fml("");
     line = regex_replace(line, rx, fmt);
+    line = regex_replace(line, lx, fml);
     inpt = line.c_str();
     task3(inpt, strlen(inpt));
     cout << endl;
